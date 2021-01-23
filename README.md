@@ -4,40 +4,36 @@ Retrieve the price at every block from a medianizer or price-feed contract.
 
 ## Dependencies
 
-You will need `seth` https://dapp.tools/seth/
+You will need node and npm:
+```bash
+npm install
+```
 
 And more importantly, an Ethereum node running in archive mode
 
 ## Usage
 
 ```bash
-export ETH_RPC_URL=[path to node]
-./run.sh <address> [blocks to report] [starting block]
+npm start [path to rpc node] [oracle contract address] [address of a whitelisted contract] [starting block] [last block]
 ```
-
-If you have a node running at http://localhost:8545 then you do not need to export the `ETH_RPC_URL` variable.
-
-`[blocks to read]` and `[starting block]` are optional. By default it will read the last 256 blocks starting at the current latest block.
 
 ## Example
 
-Using the current ETH_USD MakerDAO Medianizer:
+Using the current ETH_BTC MakerDAO Medianizer:
 
 ```bash
-./run.sh 0x729D19f657BD0614b4985Cf1D82531c67569197B 4096 5280000
+npm start https://eth-mainnet.alchemyapi.io/v2/XXXX 0x81A679f98b63B3dDf2F17CB5619f4d6775b3c5ED 0xA3F68d722FBa26173aB64697B4625d4aD0F4C818 10900000 10900006
 ```
 
-Will return the last 4096 blocks starting from block 5280000 and going back to block 5275904. 
+Will return the last 7 blocks starting from block 10900000 and going back to block 1090006. 
 
 ```
-5280000 1521415391 544.755000000000000000 CHANGED
-5279999 1521415380 544.755000000000000000 
-5279998 1521415366 544.755000000000000000 
-5279997 1521415359 544.755000000000000000 
-5279996 1521415353 544.755000000000000000 
-5279995 1521415319 544.755000000000000000 
-5279994 1521415312 544.755000000000000000 
-5279993 1521415283 544.755000000000000000 
-5279992 1521415236 544.755000000000000000 
-5279991 1521415226 544.755000000000000000
+block,    timestamp,  price,    changed 
+10900000, 1600615026, 0.034377, yes
+10900001, 1600615034, 0.034377, no
+10900002, 1600615042, 0.034377, no
+10900003, 1600615070, 0.034377, no
+10900004, 1600615079, 0.034377, no
+10900005, 1600615101, 0.034377, no
+10900006, 1600615122, 0.034377, no
 ```
